@@ -1,0 +1,23 @@
+{
+  "name": "amohelang-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run serve\" \"npm run server\"",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "server": "node server/index.js"
+  },
+  "dependencies": {
+    "vue": "^3.3.0",
+    "vue-router": "^4.2.0",
+    "nodemailer": "^6.9.0",
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "@vue/cli-service": "^5.0.8",
+    "@vue/compiler-sfc": "^3.3.0",
+    "concurrently": "^8.0.0"
+  }
+}
