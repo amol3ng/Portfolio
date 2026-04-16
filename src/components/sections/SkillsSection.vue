@@ -8,25 +8,45 @@
         <p>Expertise across the full development stack</p>
       </div>
 
-      <div class="skills-grid">
-        <div v-for="category in skillCategories" :key="category.name" class="skill-category">
-          <div class="category-header">
-            <span class="category-icon" v-html="category.icon"></span>
-            <h3 class="category-title" :style="{ color: category.color }">{{ category.name }}</h3>
-          </div>
-          <div class="skills-list">
-            <SkillCard
-              v-for="skill in category.skills"
-              :key="skill.name"
-              :name="skill.name"
-              :description="skill.description"
-              :icon="skill.icon"
-            />
-          </div>
-        </div>
+      <!-- Tab Navigation -->
+      <div class="tab-nav">
+        <button
+          v-for="(category, index) in skillCategories"
+          :key="category.name"
+          class="tab-btn"
+          :class="{ active: activeTab === index }"
+          @click="activeTab = index"
+        >
+          <span class="tab-icon" v-html="category.icon"></span>
+          <span class="tab-label">{{ category.name }}</span>
+        </button>
       </div>
 
-      <!-- Tech Icons Grid -->
+      <!-- Tab Content -->
+      <div class="tab-content">
+        <transition name="fade" mode="out-in">
+          <div :key="activeTab" class="skill-panel">
+            <div class="panel-header">
+              <span class="panel-icon" v-html="skillCategories[activeTab].icon"></span>
+              <h3 class="panel-title" :style="{ color: skillCategories[activeTab].color }">
+                {{ skillCategories[activeTab].name }}
+              </h3>
+              <span class="skill-count">{{ skillCategories[activeTab].skills.length }} skills</span>
+            </div>
+            <div class="skills-grid">
+              <SkillCard
+                v-for="skill in skillCategories[activeTab].skills"
+                :key="skill.name"
+                :name="skill.name"
+                :description="skill.description"
+                :icon="skill.icon"
+              />
+            </div>
+          </div>
+        </transition>
+      </div>
+
+      <!-- Tech Cloud -->
       <div class="tech-cloud">
         <div class="tech-cloud-title">All Technologies</div>
         <div class="tech-tags">
@@ -40,13 +60,14 @@
 <script>
 import SkillCard from '../ui/SkillCard.vue'
 
-const icon = (paths) => `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#895159" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`
+const icon = (paths) => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`
 
 export default {
   name: 'SkillsSection',
   components: { SkillCard },
   data() {
     return {
+      activeTab: 0,
       skillCategories: [
         {
           name: 'Frontend',
@@ -56,7 +77,7 @@ export default {
             {
               name: 'React',
               description: 'Component-based UI development',
-              icon: icon('<circle cx="12" cy="12" r="2"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>')
+              icon: icon('<circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>')
             },
             {
               name: 'Next.js',
@@ -114,6 +135,11 @@ export default {
               name: 'Python',
               description: 'Backend scripting & automation',
               icon: icon('<path d="M12 2C9 2 7 4 7 7v2h5v1H6c-2 0-4 2-4 5s2 5 4 5h1v-3H6c-1 0-2-.9-2-2s.9-2 2-2h6c2 0 4-2 4-4V7c0-3-2-5-4-5z"/><path d="M12 22c3 0 5-2 5-5v-2h-5v-1h6c2 0 4-2 4-5s-2-5-4-5h-1v3h1c1 0 2 .9 2 2s-.9 2-2 2h-6c-2 0-4 2-4 4v3c0 3 2 5 4 5z"/>')
+            },
+            {
+              name: 'PHP',
+              description: 'Server-side scripting language',
+              icon: icon('<ellipse cx="12" cy="12" rx="10" ry="6"/><path d="M9 10h2.5a1.5 1.5 0 0 1 0 3H9v-3z"/><path d="M9 13v3"/><path d="M14 10v6"/><path d="M14 13h3"/>')
             },
             {
               name: 'Django',
@@ -175,7 +201,7 @@ export default {
       allTechs: [
         'React', 'Next.js', 'Vue.js', 'JavaScript', 'TypeScript',
         'HTML', 'CSS', 'Tailwind CSS', 'Bootstrap',
-        'Node.js', 'Python', 'Django',
+        'Node.js', 'Python', 'PHP', 'Django',
         'MySQL', 'PostgreSQL', 'Prisma', 'Oracle APEX',
         'Vercel', 'Git', 'REST APIs'
       ]
@@ -195,51 +221,127 @@ export default {
   font-family: 'Roboto', sans-serif;
 }
 
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
+/* Tab Navigation */
+.tab-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.tab-nav::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: 1.5px solid var(--slate-200);
+  border-radius: 40px;
+  background: var(--white);
+  color: var(--slate-500);
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tab-btn:hover {
+  border-color: rgba(137,81,89,0.4);
+  color: var(--maroon);
+}
+
+.tab-btn.active {
+  background: var(--maroon);
+  border-color: var(--maroon);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(137,81,89,0.25);
+}
+
+.tab-icon {
+  display: flex;
+  align-items: center;
+}
+
+.tab-btn:not(.active) .tab-icon :deep(svg) {
+  stroke: currentColor;
+}
+
+.tab-btn.active .tab-icon :deep(svg) {
+  stroke: #fff;
+}
+
+/* Panel */
+.tab-content {
   margin-bottom: 60px;
 }
 
-.skill-category {
+.skill-panel {
   background: var(--white);
   border-radius: var(--radius-lg);
-  padding: 28px;
   border: 1px solid var(--slate-200);
   box-shadow: var(--shadow-sm);
-  transition: var(--transition);
+  padding: 28px;
 }
 
-.skill-category:hover {
-  box-shadow: var(--shadow-lg);
-}
-
-.category-header {
+.panel-header {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 20px;
-  padding-bottom: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
   border-bottom: 1px solid var(--slate-100);
 }
 
-.category-icon {
+.panel-icon {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
-.category-title {
+.panel-icon :deep(svg) {
+  stroke: var(--maroon);
+}
+
+.panel-title {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 18px;
+  flex: 1;
 }
 
-.skills-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.skill-count {
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Roboto', sans-serif;
+  background: rgba(137,81,89,0.08);
+  color: var(--maroon);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(137,81,89,0.15);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+/* Fade transition */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.fade-enter-from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
 }
 
 /* Tech Cloud */
@@ -283,11 +385,15 @@ export default {
   background: rgba(137,81,89,0.05);
 }
 
-@media (max-width: 900px) {
-  .skills-grid { grid-template-columns: 1fr; }
-}
-
 @media (max-width: 640px) {
-  .skills-grid { grid-template-columns: 1fr; gap: 16px; }
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+  .tab-label {
+    display: none;
+  }
+  .tab-btn {
+    padding: 10px 14px;
+  }
 }
 </style>

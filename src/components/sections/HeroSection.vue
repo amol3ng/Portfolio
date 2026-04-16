@@ -19,7 +19,6 @@
         </p>
 
         <div class="hero-stats">
-        
           <div class="stat-divider"></div>
           <div class="stat-item">
             <span class="stat-num">4+</span>
@@ -33,11 +32,12 @@
         </div>
 
         <div class="hero-ctas">
-          <a href="#contact" class="btn-primary" @click.prevent="scrollTo('#contact')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+          <router-link to="/#contact" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/>
+            </svg>
             Contact Me
-          </a>
-        
+          </router-link>
         </div>
       </div>
 
@@ -47,18 +47,16 @@
           <div class="profile-ring ring-1"></div>
           <div class="profile-ring ring-2"></div>
           <div class="profile-img-wrap">
-            <img 
-              src="@/assets/profile.jpeg" 
-              alt="Amohelang - Software Developer"
-              class="profile-image"
+            <img
+            src="@/assets/profile.jpeg"
+            alt="Amohelang - Software Developer"
+            class="profile-image"
+            fetchpriority="high"
             />
           </div>
-          <!-- Tech Tags -->
           <div class="tech-tag tag-1">Vue.js</div>
           <div class="tech-tag tag-2">Node.js</div>
           <div class="tech-tag tag-3">mySQL</div>
-          <!-- Floating Badges -->
-      
         </div>
       </div>
     </div>
@@ -81,15 +79,6 @@ export default {
   },
   mounted() {
     setTimeout(() => { this.mounted = true }, 100)
-  },
-  methods: {
-    scrollTo(hash) {
-      const el = document.querySelector(hash)
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' })
-        setTimeout(() => window.scrollBy(0, -80), 100)
-      }
-    }
   }
 }
 </script>
@@ -125,7 +114,6 @@ export default {
   padding-bottom: 80px;
 }
 
-/* Left */
 .hero-left {
   opacity: 0;
   transform: translateX(-30px);
@@ -254,13 +242,12 @@ export default {
   flex-wrap: wrap;
 }
 
-/* Right */
 .hero-right {
   display: flex;
   justify-content: center;
   opacity: 0;
   transform: translateX(30px);
-  transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 .hero-right.visible {
   opacity: 1;
@@ -322,23 +309,6 @@ export default {
   display: block;
 }
 
-.profile-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  color: var(--slate-400);
-  font-size: 13px;
-}
-
-.profile-icon {
-  width: 80px;
-  height: 80px;
-}
-
 .tech-tag {
   position: absolute;
   background: white;
@@ -361,31 +331,6 @@ export default {
   50% { transform: translateY(-6px); }
 }
 
-.float-badge {
-  position: absolute;
-  bottom: 30px;
-  right: 10px;
-  background: var(--maroon);
-  color: white;
-  border-radius: 12px;
-  padding: 10px 16px;
-  text-align: center;
-  box-shadow: var(--maroon-shadow);
-  animation: float 4s ease-in-out infinite 1.5s;
-}
-.badge-num {
-  display: block;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  font-size: 20px;
-  line-height: 1;
-}
-.badge-text {
-  font-size: 11px;
-  opacity: 0.85;
-}
-
-/* Scroll hint */
 .scroll-hint {
   position: absolute;
   bottom: 30px;
@@ -422,7 +367,6 @@ export default {
   100% { transform: translateY(8px); opacity: 0; }
 }
 
-/* Responsive */
 @media (max-width: 900px) {
   .hero-container {
     grid-template-columns: 1fr;

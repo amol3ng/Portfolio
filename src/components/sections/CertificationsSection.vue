@@ -40,7 +40,7 @@ export default {
         {
           title: 'Full Stack Developer',
           issuer: 'FNB App Academy',
-          date: 'Issued: October 2023',
+          date: 'Issued: August 2025',
           icon: 'https://logo.clearbit.com/fnb.co.za',
           initials: 'FNB',
           badgeColor: 'rgba(0,114,206,0.1)',
@@ -49,7 +49,7 @@ export default {
         {
           title: 'Full Stack Developer',
           issuer: 'Codeeza Bootcamp',
-          date: 'Issued: August 2023',
+          date: 'Issued: May 2025',
           icon: null,
           initials: 'CZ',
           badgeColor: 'rgba(71,162,72,0.1)',
