@@ -85,7 +85,7 @@
                 <input
                   type="text"
                   v-model="form.fullName"
-                  placeholder="Amohelang Mokhele"
+                  placeholder="Your full name"
                   :class="{ error: errors.fullName }"
                 />
                 <span v-if="errors.fullName" class="field-error">{{ errors.fullName }}</span>

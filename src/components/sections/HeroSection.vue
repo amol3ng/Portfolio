@@ -48,10 +48,10 @@
           <div class="profile-ring ring-2"></div>
           <div class="profile-img-wrap">
             <img
-            src="@/assets/profile.jpeg"
-            alt="Amohelang - Software Developer"
-            class="profile-image"
-            fetchpriority="high"
+              src="@/assets/profile.jpeg"
+              alt="Amohelang - Software Developer"
+              class="profile-image"
+              fetchpriority="high"
             />
           </div>
           <div class="tech-tag tag-1">Vue.js</div>
@@ -382,8 +382,13 @@ export default {
   .name-highlight::after { display: none; }
 }
 
+/* ✅ Hide scroll hint on mobile */
 @media (max-width: 480px) {
   .hero-stats { flex-wrap: wrap; gap: 16px; }
   .stat-divider { display: none; }
+
+  .scroll-hint {
+    display: none;
+  }
 }
 </style>
