@@ -117,7 +117,6 @@
               <label>Message <span class="req">*</span></label>
               <textarea
                 v-model="form.message"
-                placeholder="Tell me about your project, idea, or opportunity..."
                 rows="5"
                 :class="{ error: errors.message }"
               ></textarea>

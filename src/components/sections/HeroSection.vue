@@ -60,14 +60,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Scroll Indicator -->
-    <div class="scroll-hint">
-      <div class="scroll-mouse">
-        <div class="scroll-wheel"></div>
-      </div>
-      <span>Scroll</span>
-    </div>
   </section>
 </template>
 
@@ -254,10 +246,11 @@ export default {
   transform: translateX(0);
 }
 
+/* ✅ Bigger profile frame on desktop */
 .profile-frame {
   position: relative;
-  width: 380px;
-  height: 420px;
+  width: 460px;
+  height: 500px;
 }
 
 .profile-ring {
@@ -266,16 +259,16 @@ export default {
   border: 1.5px solid rgba(137,81,89,0.2);
 }
 .ring-1 {
-  width: 320px;
-  height: 320px;
+  width: 390px;
+  height: 390px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   animation: spin 20s linear infinite;
 }
 .ring-2 {
-  width: 370px;
-  height: 370px;
+  width: 450px;
+  height: 450px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -288,13 +281,14 @@ export default {
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
+/* ✅ Bigger image wrap on desktop */
 .profile-img-wrap {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 260px;
-  height: 280px;
+  width: 320px;
+  height: 345px;
   border-radius: var(--radius-xl);
   background: var(--off-white);
   border: 3px solid var(--maroon);
@@ -331,42 +325,7 @@ export default {
   50% { transform: translateY(-6px); }
 }
 
-.scroll-hint {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  color: var(--slate-400);
-  font-size: 12px;
-}
-
-.scroll-mouse {
-  width: 22px;
-  height: 34px;
-  border: 2px solid var(--slate-300);
-  border-radius: 11px;
-  display: flex;
-  justify-content: center;
-  padding-top: 6px;
-}
-
-.scroll-wheel {
-  width: 3px;
-  height: 6px;
-  background: var(--slate-400);
-  border-radius: 2px;
-  animation: scroll-down 1.5s ease infinite;
-}
-
-@keyframes scroll-down {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(8px); opacity: 0; }
-}
-
+/* ✅ Tablet view - bigger than original */
 @media (max-width: 900px) {
   .hero-container {
     grid-template-columns: 1fr;
@@ -377,18 +336,20 @@ export default {
   .hero-desc { margin: 0 auto 32px; }
   .hero-ctas { justify-content: center; }
   .hero-right { order: -1; }
-  .profile-frame { width: 300px; height: 340px; }
-  .profile-img-wrap { width: 200px; height: 220px; }
+
+  .profile-frame { width: 380px; height: 420px; }
+  .ring-1 { width: 320px; height: 320px; }
+  .ring-2 { width: 370px; height: 370px; }
+  .profile-img-wrap { width: 260px; height: 285px; }
   .name-highlight::after { display: none; }
 }
 
-/* ✅ Hide scroll hint on mobile */
 @media (max-width: 480px) {
   .hero-stats { flex-wrap: wrap; gap: 16px; }
   .stat-divider { display: none; }
-
-  .scroll-hint {
-    display: none;
-  }
+  .profile-frame { width: 300px; height: 340px; }
+  .ring-1 { width: 255px; height: 255px; }
+  .ring-2 { width: 295px; height: 295px; }
+  .profile-img-wrap { width: 200px; height: 220px; }
 }
 </style>
