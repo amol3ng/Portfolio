@@ -84,7 +84,26 @@ export default {
           githubUrl: '',
           bgColor: '#fff7ed',
           accentColor: '#ea580c'
-        }
+        },
+        {
+  title: 'SpySee - QR Attendance Tracker',
+  description: 'Digital attendance system that tracks attendance via QR code scanning. The QR code regenerates every 30 seconds to prevent proxy check-ins and ensure attendees are physically present.',
+  technologies: ['OOP PHP', 'MySQL'],
+  liveUrl: 'https://spysee.lcstudio-incubate.co.za',
+  githubUrl: 'https://github.com/Life-Choices-Cohort-17-v2/Digital-Attendence-Project.git',
+  bgColor: '#f5f3ff',
+  accentColor: '#7c3aed'
+},
+
+{
+  title: 'Expense Tracker',
+  description: 'A frontend-focused expense tracking app built in React, currently being refined to seamlessly plug in backend logic down the line.',
+  technologies: ['React'],
+  liveUrl: 'http://expenseflow33.netlify.app/',
+  githubUrl: 'https://github.com/amol3ng/Expense_tracker.git',
+  bgColor: '#fdf4ff',
+  accentColor: '#c026d3'
+},
       ]
     }
   },
